@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Career Recommendations - SkillScout{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm mt-5">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">Your Career Recommendations</h2>
+                    
+                    {% if recommendations %}
+                        <div class="row">
+                            {% for career in recommendations %}
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ career.career }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{ career.category }}</h6>
+                                            
+                                            <div class="progress mb-3">
+                                                <div class="progress-bar" role="progressbar" 
+                                                    style="width: {{ career.match_score }}%"
+                                                    aria-valuenow="{{ career.match_score }}" 
+                                                    aria-valuemin="0" 
+                                                    aria-valuemax="100">
+                                                    {{ "%.1f"|format(career.match_score) }}%
+                                                </div>
+                                            </div>
+                                            
+                                            <p class="card-text">
+                                                <strong>Required Education:</strong> {{ career.required_education }}<br>
+                                                <strong>Required Skills:</strong> {{ career.required_skills }}<br>
+                                                <strong>Median Salary:</strong> ${{ "{:,.2f}".format(career.salary_median) }}<br>
+                                                <strong>Growth Rate:</strong> {{ "%.1f"|format(career.growth_rate) }}%<br>
+                                                <strong>Market Demand:</strong> {{ career.market_demand }}/5
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="{{ url_for('profile') }}" class="btn btn-primary">Update Profile</a>
+                        </div>
+                    {% else %}
+                        <div class="text-center">
+                            <p class="lead mb-4">No recommendations yet. Please complete your profile to get personalized career recommendations.</p>
+                            <a href="{{ url_for('profile') }}" class="btn btn-primary btn-lg">Complete Profile</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

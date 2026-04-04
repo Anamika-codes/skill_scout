@@ -1,0 +1,21 @@
+name,location,tier,tuition_fee,acceptance_rate,avg_gpa,programs_offered,career_paths,ranking,website,description
+Indian Institute of Technology Bombay,Mumbai,Tier 1,200000,0.1,9.5,"Computer Science, Electrical Engineering, Mechanical Engineering","Software Development, Research, Engineering",1,https://www.iitb.ac.in,Top engineering institute in India
+Indian Institute of Technology Delhi,Delhi,Tier 1,200000,0.1,9.4,"Computer Science, Electronics, Civil Engineering","Technology, Research, Infrastructure",2,https://www.iitd.ac.in,Leading technology institute
+Indian Institute of Technology Madras,Chennai,Tier 1,200000,0.1,9.3,"Computer Science, Chemical Engineering, Aerospace","Research, Technology, Manufacturing",3,https://www.iitm.ac.in,Prominent engineering institute
+Indian Institute of Technology Kanpur,Kanpur,Tier 1,200000,0.1,9.2,"Computer Science, Aerospace, Materials Science","Research, Technology, Defense",4,https://www.iitk.ac.in,Leading research institute
+Indian Institute of Technology Kharagpur,Kharagpur,Tier 1,200000,0.1,9.1,"Computer Science, Mining, Metallurgy","Technology, Research, Industry",5,https://www.iitkgp.ac.in,Oldest IIT with strong industry ties
+Indian Institute of Science,Bangalore,Tier 1,220000,0.05,9.6,"Computer Science, Physics, Chemistry","Research, Academia, Industry",6,https://www.iisc.ac.in,India's premier research institution
+All India Institute of Medical Sciences,Delhi,Tier 1,250000,0.01,9.7,"Medicine, Biotechnology, Public Health","Healthcare, Research, Public Service",7,https://www.aiims.edu,Top medical institute in India
+Indian Statistical Institute,Kolkata,Tier 1,180000,0.08,9.3,"Statistics, Mathematics, Computer Science","Research, Analytics, Academia",8,https://www.isical.ac.in,Leading institute for statistics and mathematics
+National Institute of Technology Karnataka,Surathkal,Tier 2,150000,0.2,8.5,"Computer Science, Electronics, Mechanical","Technology, Engineering, Research",9,https://www.nitk.ac.in,Reputed engineering college
+Birla Institute of Technology and Science,Pilani,Tier 2,180000,0.15,8.8,"Computer Science, Electronics, Chemical","Technology, Research, Business",10,https://www.bits-pilani.ac.in,Private engineering institute
+Indian Institute of Information Technology,Hyderabad,Tier 2,160000,0.18,8.6,"Computer Science, Electronics, Data Science","Technology, Research, Analytics",11,https://www.iiit.ac.in,Information technology focused institute
+Vellore Institute of Technology,Vellore,Tier 2,170000,0.2,8.4,"Computer Science, Electronics, Mechanical","Technology, Engineering, Research",12,https://www.vit.ac.in,Private engineering college
+Manipal Institute of Technology,Manipal,Tier 2,190000,0.25,8.3,"Computer Science, Electronics, Civil","Technology, Engineering, Infrastructure",13,https://manipal.edu/mit.html,Private engineering institute
+National Institute of Technology Trichy,Trichy,Tier 2,150000,0.2,8.5,"Computer Science, Civil, Chemical","Engineering, Research, Industry",14,https://www.nitt.edu,Leading NIT with strong placements
+Delhi Technological University,Delhi,Tier 2,140000,0.25,8.2,"Computer Science, Mechanical, Electrical","Technology, Engineering, Research",15,https://www.dtu.ac.in,State university with strong industry connections
+SRM Institute of Science and Technology,Chennai,Tier 3,140000,0.3,7.8,"Computer Science, Electronics, Mechanical","Technology, Engineering, Research",16,https://www.srmist.edu.in,Private engineering college
+Amity University,Noida,Tier 3,130000,0.35,7.5,"Computer Science, Electronics, Civil","Technology, Engineering, Business",17,https://www.amity.edu,Private university
+Lovely Professional University,Jalandhar,Tier 3,120000,0.4,7.2,"Computer Science, Electronics, Mechanical","Technology, Engineering, Business",18,https://www.lpu.in,Private university with diverse programs
+Chandigarh University,Mohali,Tier 3,125000,0.38,7.3,"Computer Science, Electronics, Civil","Technology, Engineering, Research",19,https://www.cuchd.in,Private university with modern infrastructure
+Galgotias University,Greater Noida,Tier 3,110000,0.45,7.0,"Computer Science, Electronics, Mechanical","Technology, Engineering, Business",20,https://www.galgotiasuniversity.edu.in,Private university with industry-focused curriculum 

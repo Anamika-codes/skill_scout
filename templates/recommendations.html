@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Career Recommendations - SkillScout{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="dashboard-card">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">Your Career Recommendations</h2>
+                    <p class="text-muted">Detailed analysis of your best career matches</p>
+                </div>
+                
+                {% for career in recommendations %}
+                <div class="card mb-4 recommendation-card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h3 class="mb-1">{{ career.career }}</h3>
+                                <p class="text-white-50 mb-0">{{ career.category }}</p>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <div class="career-match-score text-white">{{ "%.1f"|format(career.match_score * 100) }}%</div>
+                                <small class="text-white-50">Match Score</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="fw-bold mb-3">Career Details</h5>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="mb-2"><strong>Education:</strong><br>
+                                            <small class="text-muted">{{ career.education_requirements }}</small>
+                                        </p>
+                                        <p class="mb-2"><strong>Skills:</strong><br>
+                                            <small class="text-muted">{{ career.required_skills }}</small>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-2"><strong>Salary:</strong><br>
+                                            <small class="text-success">₹{{ "{:,.0f}".format(career.salary_median) }}/year</small>
+                                        </p>
+                                        <p class="mb-2"><strong>Growth:</strong><br>
+                                            <small class="text-info">{{ "%.1f"|format(career.growth_rate) }}%</small>
+                                        </p>
+                                        <p class="mb-2"><strong>Demand:</strong><br>
+                                            <small class="text-warning">{{ career.market_demand }}/5</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5 class="fw-bold mb-3">Recommended Colleges</h5>
+                                {% for tier in ['Tier 1', 'Tier 2', 'Tier 3'] %}
+                                    {% set colleges = career.career|get_college_recommendations(tier) %}
+                                    {% if colleges %}
+                                        <div class="mb-3">
+                                            <span class="badge bg-primary mb-2">{{ tier }}</span>
+                                            {% for college in colleges %}
+                                                <div class="college-card">
+                                                    <h6 class="fw-bold">{{ college.name }}</h6>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <small><strong>Location:</strong> {{ college.location }}</small><br>
+                                                            <small><strong>Fees:</strong> {{ college.fees }}</small><br>
+                                                            <small><strong>Acceptance:</strong> {{ college.acceptance_rate }}</small>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <small><strong>GPA Required:</strong> {{ college.avg_gpa }}</small><br>
+                                                            <small><strong>Programs:</strong> {{ college.programs|join(', ') }}</small><br>
+                                                            <small><strong>Ranking:</strong> {{ college.ranking }}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                {% if not recommendations %}
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-4x text-muted mb-4"></i>
+                    <h3 class="fw-bold mb-3">No Recommendations Found</h3>
+                    <p class="lead text-muted mb-4">Please complete your profile to get personalized career recommendations.</p>
+                    <a href="{{ url_for('profile') }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-edit me-2"></i>Complete Profile
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

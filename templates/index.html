@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to SkillScout - Your Career Guidance Companion{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Discover Your Perfect Career Path</h1>
+                <p class="lead mb-4">SkillScout uses advanced AI to analyze your skills, interests, and experience to recommend the best career opportunities tailored just for you.</p>
+                {% if not current_user.is_authenticated %}
+                    <div class="d-grid gap-3 d-md-flex">
+                        <a href="{{ url_for('register') }}" class="btn btn-light btn-lg me-md-2">
+                            <i class="fas fa-rocket me-2"></i>Get Started
+                        </a>
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="d-grid gap-2 d-md-flex">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-light btn-lg">
+                            <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="{{ url_for('static', filename='images/Career.png') }}" alt="Career Guidance" class="img-fluid rounded shadow-lg" style="max-width: 500px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">Why Choose SkillScout?</h2>
+                <p class="lead text-muted">Our AI-powered platform helps you make informed career decisions</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 feature-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-robot fa-3x mb-3 text-primary"></i>
+                        <h3 class="card-title h4">AI-Powered Analysis</h3>
+                        <p class="card-text">Advanced machine learning algorithms analyze your profile to provide personalized career recommendations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 feature-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+                        <h3 class="card-title h4">Skill Tracking</h3>
+                        <p class="card-text">Track your skills development and get recommendations for improvement and growth.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 feature-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-briefcase fa-3x mb-3 text-primary"></i>
+                        <h3 class="card-title h4">Career Insights</h3>
+                        <p class="card-text">Get detailed insights about different career paths and required skills.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="display-5 fw-bold">How It Works</h2>
+                <p class="lead text-muted">Three simple steps to find your perfect career path</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 text-center mb-4">
+                <div class="step-circle">
+                    <span class="h3 mb-0">1</span>
+                </div>
+                <h3 class="h4 fw-bold">Create Your Profile</h3>
+                <p class="text-muted">Sign up and fill in your skills, experience, and interests to get started.</p>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center mb-4">
+                <div class="step-circle">
+                    <span class="h3 mb-0">2</span>
+                </div>
+                <h3 class="h4 fw-bold">Get Analyzed</h3>
+                <p class="text-muted">Our AI analyzes your profile and matches it with career opportunities.</p>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center mb-4">
+                <div class="step-circle">
+                    <span class="h3 mb-0">3</span>
+                </div>
+                <h3 class="h4 fw-bold">Receive Recommendations</h3>
+                <p class="text-muted">Get personalized career recommendations and detailed insights.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold mb-4">Ready to Start Your Career Journey?</h2>
+                <p class="lead mb-4">Join thousands of users who have found their perfect career path with SkillScout.</p>
+                {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('register') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-rocket me-2"></i>Get Started Now
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

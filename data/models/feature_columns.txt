@@ -1,0 +1,11 @@
+gpa
+math_score
+science_score
+english_score
+extracurricular_activities
+leadership_roles
+skill_level
+knowledge_level
+ability_level
+market_demand
+growth_rate

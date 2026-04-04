@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - SkillScout{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm mt-5">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">Your Profile</h2>
+                    
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-info">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <form method="POST" action="{{ url_for('profile') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Academic Information</h5>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Grading System</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="grading_system" id="cgpa" value="cgpa" 
+                                           {% if current_user.profile and current_user.profile.grading_system == 'cgpa' %}checked{% endif %}>
+                                    <label class="form-check-label" for="cgpa">
+                                        CGPA (0-10)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="grading_system" id="percentage" value="percentage"
+                                           {% if current_user.profile and current_user.profile.grading_system == 'percentage' %}checked{% endif %}>
+                                    <label class="form-check-label" for="percentage">
+                                        Percentage (0-100%)
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3" id="cgpa-input">
+                                <label for="gpa" class="form-label">CGPA (0-10)</label>
+                                <input type="number" class="form-control" id="gpa" name="gpa" 
+                                       min="0" max="10" step="0.1"
+                                       value="{{ current_user.profile.gpa if current_user.profile and current_user.profile.grading_system == 'cgpa' else '' }}">
+                            </div>
+                            
+                            <div class="mb-3" id="percentage-input" style="display: none;">
+                                <label for="percentage" class="form-label">Percentage (0-100%)</label>
+                                <input type="number" class="form-control" id="percentage" name="percentage" 
+                                       min="0" max="100" step="0.1"
+                                       value="{{ current_user.profile.percentage if current_user.profile and current_user.profile.grading_system == 'percentage' else '' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="math_score" class="form-label">Math Score (0-100)</label>
+                                <input type="number" class="form-control" id="math_score" name="math_score" 
+                                       min="0" max="100" required
+                                       value="{{ current_user.profile.math_score if current_user.profile else '' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="science_score" class="form-label">Science Score (0-100)</label>
+                                <input type="number" class="form-control" id="science_score" name="science_score" 
+                                       min="0" max="100" required
+                                       value="{{ current_user.profile.science_score if current_user.profile else '' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="english_score" class="form-label">English Score (0-100)</label>
+                                <input type="number" class="form-control" id="english_score" name="english_score" 
+                                       min="0" max="100" required
+                                       value="{{ current_user.profile.english_score if current_user.profile else '' }}">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Activities & Interests</h5>
+                            
+                            <div class="mb-3">
+                                <label for="extracurricular_activities" class="form-label">Number of Extracurricular Activities (0-5)</label>
+                                <input type="number" class="form-control" id="extracurricular_activities" name="extracurricular_activities" 
+                                       min="0" max="5" required
+                                       value="{{ current_user.profile.extracurricular_activities if current_user.profile else '' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="leadership_roles" class="form-label">Number of Leadership Roles (0-3)</label>
+                                <input type="number" class="form-control" id="leadership_roles" name="leadership_roles" 
+                                       min="0" max="3" required
+                                       value="{{ current_user.profile.leadership_roles if current_user.profile else '' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="interests" class="form-label">Interests (comma-separated)</label>
+                                <input type="text" class="form-control" id="interests" name="interests" 
+                                       placeholder="e.g., Technology, Business, Healthcare, Arts"
+                                       value="{{ current_user.profile.interests if current_user.profile else '' }}">
+                                <div class="form-text">Enter your interests separated by commas. These will help us find careers that match your passions.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Save Profile & Get Recommendations</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cgpaRadio = document.getElementById('cgpa');
+    const percentageRadio = document.getElementById('percentage');
+    const cgpaInput = document.getElementById('cgpa-input');
+    const percentageInput = document.getElementById('percentage-input');
+
+    function toggleInputs() {
+        if (cgpaRadio.checked) {
+            cgpaInput.style.display = 'block';
+            percentageInput.style.display = 'none';
+        } else {
+            cgpaInput.style.display = 'none';
+            percentageInput.style.display = 'block';
+        }
+    }
+
+    cgpaRadio.addEventListener('change', toggleInputs);
+    percentageRadio.addEventListener('change', toggleInputs);
+
+    // Initial toggle based on saved preference
+    toggleInputs();
+});
+</script>
+{% endblock %} 

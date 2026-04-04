@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to SkillScout - Your Career Guidance Companion{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="row align-items-center py-5">
+        <div class="col-md-6">
+            <h1 class="display-4 fw-bold mb-4">Discover Your Perfect Career Path</h1>
+            <p class="lead mb-4">SkillScout uses AI to analyze your skills, interests, and experience to recommend the best career opportunities for you.</p>
+            {% if not current_user.is_authenticated %}
+                <div class="d-grid gap-2 d-md-flex">
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-md-2">Get Started</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">Sign In</a>
+                </div>
+            {% else %}
+                <div class="d-grid gap-2 d-md-flex">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='images/Career.png') }}" alt="Career Guidance" class="img-fluid rounded shadow">
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row py-5">
+        <div class="col-12 text-center mb-5">
+            <h2 class="display-5">Why Choose SkillScout?</h2>
+            <p class="lead">Our AI-powered platform helps you make informed career decisions</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-robot fa-3x mb-3 text-primary"></i>
+                    <h3 class="card-title h4">AI-Powered Analysis</h3>
+                    <p class="card-text">Advanced algorithms analyze your profile to provide personalized career recommendations.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+                    <h3 class="card-title h4">Skill Tracking</h3>
+                    <p class="card-text">Track your skills development and get recommendations for improvement.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-briefcase fa-3x mb-3 text-primary"></i>
+                    <h3 class="card-title h4">Career Insights</h3>
+                    <p class="card-text">Get detailed insights about different career paths and required skills.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="row py-5 bg-light rounded">
+        <div class="col-12 text-center mb-5">
+            <h2 class="display-5">How It Works</h2>
+            <p class="lead">Three simple steps to find your perfect career path</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                <span class="h3 mb-0">1</span>
+            </div>
+            <h3 class="h4">Create Your Profile</h3>
+            <p>Sign up and fill in your skills, experience, and interests.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                <span class="h3 mb-0">2</span>
+            </div>
+            <h3 class="h4">Get Analyzed</h3>
+            <p>Our AI analyzes your profile and matches it with career opportunities.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                <span class="h3 mb-0">3</span>
+            </div>
+            <h3 class="h4">Receive Recommendations</h3>
+            <p>Get personalized career recommendations and insights.</p>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row py-5 text-center">
+        <div class="col-12">
+            <h2 class="display-5 mb-4">Ready to Start Your Career Journey?</h2>
+            <p class="lead mb-4">Join thousands of users who have found their perfect career path with SkillScout.</p>
+            {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Get Started Now</a>
+            {% else %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %} 

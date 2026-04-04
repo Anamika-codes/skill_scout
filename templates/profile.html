@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - SkillScout{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="dashboard-card">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">Your Profile</h2>
+                    <p class="text-muted">Complete your profile to get personalized career recommendations</p>
+                </div>
+                
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-info">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                
+                <form method="POST" action="{{ url_for('profile') }}">
+                    
+                    <!-- Academic Information Section -->
+                    <div class="profile-section">
+                        <h4><i class="fas fa-graduation-cap me-2"></i>Academic Information</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Select Your Grading System</label>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="grading_system" id="cgpa" value="cgpa" 
+                                               {% if current_user.profile and current_user.profile.grading_system == 'cgpa' %}checked{% endif %}>
+                                        <label class="form-check-label" for="cgpa">
+                                            CGPA (0-10)
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="grading_system" id="percentage" value="percentage"
+                                               {% if current_user.profile and current_user.profile.grading_system == 'percentage' %}checked{% endif %}>
+                                        <label class="form-check-label" for="percentage">
+                                            Percentage (0-100%)
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3" id="cgpa-input">
+                                    <label for="gpa" class="form-label">Enter Your CGPA (0-10)</label>
+                                    <input type="number" class="form-control" id="gpa" name="gpa" 
+                                           min="0" max="10" step="0.1"
+                                           value="{{ current_user.profile.gpa if current_user.profile and current_user.profile.grading_system == 'cgpa' else '' }}">
+                                </div>
+                                
+                                <div class="mb-3" id="percentage-input">
+                                    <label for="percentage" class="form-label">Enter Your Percentage (0-100%)</label>
+                                    <input type="number" class="form-control" id="percentage" name="percentage" 
+                                           min="0" max="100" step="0.1"
+                                           value="{{ current_user.profile.percentage if current_user.profile and current_user.profile.grading_system == 'percentage' else '' }}">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="math_score" class="form-label">Math Score</label>
+                                    <input type="number" step="0.01" class="form-control" id="math_score" name="math_score"
+                                           value="{{ current_user.profile.math_score if current_user.profile.math_score else '' }}">
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="science_score" class="form-label">Science Score</label>
+                                    <input type="number" step="0.01" class="form-control" id="science_score" name="science_score"
+                                           value="{{ current_user.profile.science_score if current_user.profile.science_score else '' }}">
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="english_score" class="form-label">English Score</label>
+                                    <input type="number" step="0.01" class="form-control" id="english_score" name="english_score"
+                                           value="{{ current_user.profile.english_score if current_user.profile.english_score else '' }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Extracurricular Activities Section -->
+                    <div class="profile-section">
+                        <h4><i class="fas fa-users me-2"></i>Extracurricular Activities</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="extracurricular_activities" class="form-label">Number of Extracurricular Activities</label>
+                                    <input type="number" class="form-control" id="extracurricular_activities" name="extracurricular_activities"
+                                           value="{{ current_user.profile.extracurricular_activities if current_user.profile.extracurricular_activities else '' }}">
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="leadership_roles" class="form-label">Number of Leadership Roles</label>
+                                    <input type="number" class="form-control" id="leadership_roles" name="leadership_roles"
+                                           value="{{ current_user.profile.leadership_roles if current_user.profile.leadership_roles else '' }}">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="interests" class="form-label">Interests (comma-separated)</label>
+                                    <textarea class="form-control" id="interests" name="interests" rows="4" 
+                                              placeholder="e.g., programming, design, business, science">{{ current_user.profile.interests if current_user.profile.interests else '' }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- College Preferences Section -->
+                    <div class="profile-section">
+                        <h4><i class="fas fa-university me-2"></i>College Preferences</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="preferred_location" class="form-label">Preferred Location</label>
+                                    <input type="text" class="form-control" id="preferred_location" name="preferred_location"
+                                           value="{{ current_user.profile.preferred_location if current_user.profile.preferred_location else '' }}"
+                                           placeholder="e.g., California, New York, etc.">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="budget_range" class="form-label">Budget Range</label>
+                                    <select class="form-control" id="budget_range" name="budget_range">
+                                        <option value="">Select Budget Range</option>
+                                        <option value="low" {% if current_user.profile.budget_range == 'low' %}selected{% endif %}>Low (Under ₹5,00,000)</option>
+                                        <option value="medium" {% if current_user.profile.budget_range == 'medium' %}selected{% endif %}>Medium (₹5,00,000 - ₹10,00,000)</option>
+                                        <option value="high" {% if current_user.profile.budget_range == 'high' %}selected{% endif %}>High (Over ₹10,00,000)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="preferred_college_tier" class="form-label">Preferred College Tier</label>
+                                    <select class="form-control" id="preferred_college_tier" name="preferred_college_tier">
+                                        <option value="">Select College Tier</option>
+                                        <option value="Tier 1" {% if current_user.profile.preferred_college_tier == 'Tier 1' %}selected{% endif %}>Tier 1 (Top Universities)</option>
+                                        <option value="Tier 2" {% if current_user.profile.preferred_college_tier == 'Tier 2' %}selected{% endif %}>Tier 2 (Mid-Range Universities)</option>
+                                        <option value="Tier 3" {% if current_user.profile.preferred_college_tier == 'Tier 3' %}selected{% endif %}>Tier 3 (Other Universities)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-save me-2"></i>Save Profile & Get Recommendations
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
